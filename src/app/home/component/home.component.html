@@ -1,0 +1,34 @@
+<toaster-container></toaster-container>
+
+<div class="container">
+    <h2 align="center">Tree View Angular 4</h2>
+    <div>
+        <form id="loggingForm" [formGroup]="logging" #loggingForm="ngForm" (ngSubmit)="loggingSubmit(loggingForm.value, loggingForm.valid)"
+            novalidate>
+            <div class="form-group row">
+                <label for="correlation" class="col-2 col-form-label">User Id</label>
+                <div class="col-6">
+                    <input type="text" placeholder="Please Enter User Id" class="form-control" name="userid" formControlName="userid" id="userid"
+                        required>
+                    <div *ngIf="logging.controls['userid'].touched">
+                        <p class="form_error" *ngIf="logging.controls['userid'].hasError('required')">Please Enter user Id</p>
+                    </div>
+                </div>                
+                <div class="col-1">
+                    <button type="submit" [disabled]="logging.invalid" class="btn btn-primary" disabled>Submit</button>
+                </div>
+                <div class="col-3">
+                        <img *ngIf="loader" style="height: 100px;margin: -30px 0px;" src="../../assets/img/loader.gif" />
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>     
+
+
+<div class="container" *ngIf="listData.length > 0">
+    <div class="col-form-label">
+        <h2 align="center">Tree View Angular 4 Search Result</h2>
+    </div>
+    <p-tree [value]="listData" (onNodeExpand)="getChild($event)" [loading]="loading" loadingIcon="fa-spinner" ></p-tree>
+</div>
